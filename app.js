@@ -161,7 +161,8 @@ class App {
                 documentTemplate,
                 documentCSS: this.cliArguments['embedded-styles']? documentCSS : '',
                 embeddedImages: this.cliArguments['embedded-images'],
-                resolveReferences: this.cliArguments['resolve-references']
+                resolveReferences: this.cliArguments['resolve-references'],
+                folderImport: this.cliArguments.folderImport,
             });
         this.quipProcessor.setLogger(this.Logger);
 
@@ -173,24 +174,19 @@ class App {
             }
         }
 
-        let foldersToExport = [
-            //'FOLDER-1'
-            //'FOLDER-2'
-            //'EVZAOAW2e6U'
-            //'CUTAOA2J8VL'
-        ];
+        let foldersToExport = this.cliArguments.folders;
 
-        await this.quipProcessor.startExport(foldersToExport);
-
-        this.Logger.debug(this.quipProcessor.quipService.stats);
-
-        if(this.cliArguments.zip) {
-            //save zip file
-            const content = await this.zip.generateAsync({type: "nodebuffer", compression: "DEFLATE"});
-            await fs.writeFile(path.join(this.desinationFolder, 'quip-export.zip'), content, () => {
-                console.log("Zip-file has been saved: ", path.join(this.desinationFolder, 'quip-export.zip'));
-            });
-        }
+        this.quipProcessor.startExport(foldersToExport).then(() => {
+            this.Logger.debug(this.quipProcessor.quipService.stats);
+            if(this.cliArguments.zip) {
+                //save zip file
+                this.zip.generateAsync({type:"nodebuffer", compression: "DEFLATE"}).then((content) => {
+                    fs.writeFile(path.join(this.desinationFolder, 'quip-export.zip'), content, () => {
+                        console.log("Zip-file has been saved: ", path.join(this.desinationFolder, 'quip-export.zip'));
+                    });
+                });
+            }
+        });
     }
 }
 
