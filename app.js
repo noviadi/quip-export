@@ -163,6 +163,7 @@ class App {
                 embeddedImages: this.cliArguments['embedded-images'],
                 resolveReferences: this.cliArguments['resolve-references'],
                 folderImport: this.cliArguments.folderImport,
+                docx: this.cliArguments.docx,
             });
         this.quipProcessor.setLogger(this.Logger);
 
