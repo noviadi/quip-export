@@ -163,7 +163,7 @@ class App {
                 embeddedImages: this.cliArguments['embedded-images'],
                 resolveReferences: this.cliArguments['resolve-references'],
                 folderImport: this.cliArguments.folderImport,
-                docx: this.cliArguments.docx,
+                gdrive: this.cliArguments.gdrive,
             });
         this.quipProcessor.setLogger(this.Logger);
 
@@ -188,7 +188,7 @@ class App {
                 console.log("Zip-file has been saved: ", path.join(this.desinationFolder, 'quip-export.zip'));
             });
         }
-   }
+    }
 }
 
 module.exports = {App, documentTemplate, documentCSS};
