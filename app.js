@@ -164,6 +164,7 @@ class App {
                 resolveReferences: this.cliArguments['resolve-references'],
                 folderImport: this.cliArguments.folderImport,
                 gdrive: this.cliArguments.gdrive,
+                analyze: this.cliArguments.analyze,
             });
         this.quipProcessor.setLogger(this.Logger);
 
