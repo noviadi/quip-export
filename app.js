@@ -161,7 +161,10 @@ class App {
                 documentTemplate,
                 documentCSS: this.cliArguments['embedded-styles']? documentCSS : '',
                 embeddedImages: this.cliArguments['embedded-images'],
-                resolveReferences: this.cliArguments['resolve-references']
+                resolveReferences: this.cliArguments['resolve-references'],
+                folderImport: this.cliArguments.folderImport,
+                gdrive: this.cliArguments.gdrive,
+                analyze: this.cliArguments.analyze,
             });
         this.quipProcessor.setLogger(this.Logger);
 
@@ -173,12 +176,7 @@ class App {
             }
         }
 
-        let foldersToExport = [
-            //'FOLDER-1'
-            //'FOLDER-2'
-            //'EVZAOAW2e6U'
-            //'UPWAOAAEpFn' //Test
-        ];
+        let foldersToExport = this.cliArguments.folders;
 
         await this.quipProcessor.startExport(foldersToExport);
 
